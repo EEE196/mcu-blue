@@ -20,6 +20,7 @@
 #include "main.h"
 #include "fatfs.h"
 #include "spi.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -88,6 +89,7 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   MX_FATFS_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -140,7 +142,21 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+#include <stdio.h>
+#include <string.h>
+#ifdef __GNUC__
+  /* With GCC, small printf (option LD Linker->Libraries->Small printf
+     set to 'Yes') calls __io_putchar() */
+int __io_putchar(int ch)
+#else
+int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the UART2 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  return ch;
+}
 /* USER CODE END 4 */
 
 /**
