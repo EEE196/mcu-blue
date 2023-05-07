@@ -57,6 +57,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LoRa_CS_Pin GPIO_PIN_0
+#define LoRa_CS_GPIO_Port GPIOB
+#define LoRa_RST_Pin GPIO_PIN_1
+#define LoRa_RST_GPIO_Port GPIOB
+#define LoRa_DIO0_Pin GPIO_PIN_2
+#define LoRa_DIO0_GPIO_Port GPIOB
 #define SD_CS_Pin GPIO_PIN_15
 #define SD_CS_GPIO_Port GPIOA
 
